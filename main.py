@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from extraction.get_order_list import get_order_list
 from extraction.get_order_details import get_order_details
-from SQL.insert_orders import insert_order_details_to_db
+from SQL.insert_orders_shopee_monitor import insert_order_details_to_db
 from connections.all_connections import load_token_data_shopee
-def main():
+def shopee_monitor_bridge():
     data = load_token_data_shopee()
 
     brit_token = data.get('811879342', {}).get('access_token')
@@ -35,4 +35,4 @@ def main():
     tempo_total = datetime.strptime(hora_fim, '%Y-%m-%d %H:%M:%S') - datetime.strptime(hora_inicio, '%Y-%m-%d %H:%M:%S')
     print(f"Processo finalizado em {tempo_total}")
 
-main()
+shopee_monitor_bridge()
